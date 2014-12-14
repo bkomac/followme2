@@ -2,17 +2,21 @@
   "name": "FollowMeServer",
   "version": "0.1.0",
   "description": "FollowMeServer",
-  "main": "hello-world-server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
-  "repository": "",
+  
   "keywords": [
     "node.js",
     "eclipse",
     "nodeclipse"
   ],
-  "author": "",
+  "author": "Borut Komac",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+	  "express": "4.10.2",
+	  "socket.io": "1.2.0"
+  }
 }
