@@ -1,8 +1,10 @@
+var port = 4000;
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-console.log('Starting node on port 4000...');
+console.log('Starting node on port ' + port + '...');
 
 app.get('/', function(req, res) {
 	res.writeHead(200, {
@@ -18,6 +20,6 @@ io.on('connection', function(socket) {
 		io.emit('position', msg);
 	});
 });
-http.listen(3000, function() {
-	console.log('listening on *:4000');
+http.listen(port, function() {
+	console.log('listening on *:' + port);
 });
