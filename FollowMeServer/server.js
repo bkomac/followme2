@@ -2,6 +2,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+console.log('Starting node on port 4000...');
+
 app.get('/', function(req, res) {
 	res.writeHead(200, {
 		'Content-Type' : 'text/plain'
