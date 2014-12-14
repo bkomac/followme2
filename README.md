@@ -1,4 +1,4 @@
-followmeserver
+followme2
 ==============
 
-serverside for followme
+Remake of FollowMe with Phonegap (client) and NodeJS (server).
