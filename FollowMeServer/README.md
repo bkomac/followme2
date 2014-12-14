@@ -1,7 +1,7 @@
 
 
 # FollowMeServer
-serverside for followme
+node js serverside for followme
 
 
 ## Usage
