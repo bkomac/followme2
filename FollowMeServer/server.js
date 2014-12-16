@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
-	console.log("*** Conecting ... "+ address.address + ":" + address.port);
+	console.log("*** Conecting ... "+ socket.request.connection.remoteAddress);
 	
 	
 	socket.on('position', function(msg) {
