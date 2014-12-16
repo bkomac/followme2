@@ -10,16 +10,16 @@ app.get('/', function(req, res) {
 	res.writeHead(200, {
 		'Content-Type' : 'text/plain'
 	});
-	res.end('This is socket.io endpoint.\n');
+	res.end('This is socket.io endpoint. on port '+port+' \n');
 });
 
 io.on('connection', function(socket) {
-	console.log("Conecting ...");
+	console.log("Conecting ..."+socket);
 	socket.on('position', function(msg) {
-		console.log("message... " + msg);
+		console.log("message... " + msg.user+ ": "+msg.lat+ " "+msg.lng);
 		io.emit('position', msg);
 	});
 });
 http.listen(port, function() {
-	console.log('listening on *:' + port);
+	console.log('listening on:' + port+' ...');
 });
