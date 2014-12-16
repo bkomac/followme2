@@ -26,8 +26,8 @@ io.on('connection', function(socket) {
 	});
 });
 
-io.on('disconnect', function(){
-    console.log('*** disconnected socket #'+socket.id');
+io.on('disconnect', function(socket){
+    console.log('*** disconnected socket #'+socket.id);
   });
 
 http.listen(port, function() {
