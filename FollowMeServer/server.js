@@ -19,6 +19,7 @@ io.on('connection', function(socket) {
 	
 	
 	socket.on('position', function(msg) {
+		JSON.stringify(msg);
 		console.log("message... " + msg.user+ ": "+msg.lat+ " "+msg.lng);
 		io.emit('position', msg);
 	});
