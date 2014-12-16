@@ -15,19 +15,19 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
-	console.log("*** Conecting ... "+ socket.request.connection.remoteAddress);
+	console.log("*** Conecting ... #"+socket.id+" "+ socket.request.connection.remoteAddress);
 	
 	
 	socket.on('position', function(msg) {
 		//console.log(JSON.stringify(msg));
 		var pos = JSON.parse(msg);
-		console.log("message... " + pos.user+ ": "+pos.lat+ " "+pos.lng);
+		console.log("message... #"+socket.id+" " + pos.user+ ": "+pos.lat+ " "+pos.lng);
 		io.emit('position', msg);
 	});
 });
 
 io.on('disconnect', function(){
-    console.log('*** disconnected');
+    console.log('*** disconnected socket #'+socket.id');
   });
 
 http.listen(port, function() {
