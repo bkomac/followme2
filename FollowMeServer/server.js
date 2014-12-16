@@ -19,8 +19,9 @@ io.on('connection', function(socket) {
 	
 	
 	socket.on('position', function(msg) {
-		console.log(JSON.stringify(msg));
-		console.log("message... " + msg.user+ ": "+msg.lat+ " "+msg.lng);
+		//console.log(JSON.stringify(msg));
+		var pos = JSON.parse(msg);
+		console.log("message... " + pos.user+ ": "+pos.lat+ " "+pos.lng);
 		io.emit('position', msg);
 	});
 });
