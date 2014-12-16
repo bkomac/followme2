@@ -14,9 +14,8 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
-	console.log("*** Conecting ... "+ address.address + ":" + address.port);
-	
 	var address = socket.handshake.address;
+	console.log("*** Conecting ... "+ address.address + ":" + address.port);
 	
 	
 	socket.on('position', function(msg) {
@@ -25,7 +24,7 @@ io.on('connection', function(socket) {
 	});
 });
 
-socket.on('disconnect', function(){
+io.on('disconnect', function(){
     console.log('*** disconnected');
   });
 
