@@ -14,12 +14,21 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
-	console.log("Conecting ..."+socket);
+	console.log("*** Conecting ... "+ address.address + ":" + address.port);
+	
+	var address = socket.handshake.address;
+	
+	
 	socket.on('position', function(msg) {
 		console.log("message... " + msg.user+ ": "+msg.lat+ " "+msg.lng);
 		io.emit('position', msg);
 	});
 });
+
+socket.on('disconnect', function(){
+    console.log('*** disconnected');
+  });
+
 http.listen(port, function() {
 	console.log('listening on:' + port+' ...');
 });
