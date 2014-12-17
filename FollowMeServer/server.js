@@ -10,6 +10,7 @@ app.get('/', function(req, res) {
 	res.writeHead(200, {
 		'Content-Type' : 'text/plain'
 	});
+	console.log("GET request...");
 	res.end('This is socket.io endpoint. on port '+port+' \n');
 });
 
