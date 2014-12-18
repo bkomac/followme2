@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 		'Content-Type' : 'text/plain'
 	});
 	console.log("GET request...");
-	res.end('This is socket.io endpoint. on port '+port+' \n');
+	res.end('This is socket.io endpoint on port '+port+' \n');
 });
 
 io.on('connection', function(socket) {
