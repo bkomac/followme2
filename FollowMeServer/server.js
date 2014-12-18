@@ -11,26 +11,25 @@ app.get('/', function(req, res) {
 		'Content-Type' : 'text/plain'
 	});
 	console.log("GET request...");
-	res.end('This is socket.io endpoint on port '+port+' \n');
+	res.end('This is socket.io endpoint on port ' + port + ' \n');
 });
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
-	console.log("*** Conecting ... #"+socket.id+" "+ socket.request.connection.remoteAddress);
-	
-	
+	console.log("*** Conecting ... #" + socket.id + " " + socket.request.connection.remoteAddress);
+
 	socket.on('position', function(msg) {
-		//console.log(JSON.stringify(socket));
+		// console.log(JSON.stringify(socket));
 		var pos = JSON.parse(msg);
-		console.log("message... #"+socket.id+" " + pos.user+ ": "+pos.lat+ " "+pos.lng);
+		console.log("message... #" + socket.id + " " + pos.user + ": " + pos.lat + " " + pos.lng);
 		io.emit('position', msg);
 	});
 });
 
-io.on('disconnect', function(socket){
-    console.log('*** disconnected socket #'+socket.id);
-  });
+io.on('disconnect', function(socket) {
+	console.log('*** disconnected socket #' + socket.id);
+});
 
 http.listen(port, function() {
-	console.log('listening on:' + port+' ...');
+	console.log('listening on:' + port + ' ...');
 });
