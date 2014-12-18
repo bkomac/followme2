@@ -18,11 +18,11 @@ io.on('connection', function(socket) {
 	var address = socket.handshake.address;
 	console.log("*** Conecting ... #" + socket.id + " " + socket.request.connection.remoteAddress);
 
-	socket.on('position', function(msg) {
+	socket.on('put_position', function(msg) {
 		// console.log(JSON.stringify(socket));
 		var pos = JSON.parse(msg);
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
-		io.emit('position', msg);
+		io.emit('get_position', msg);
 	});
 });
 
