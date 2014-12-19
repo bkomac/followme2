@@ -27,7 +27,7 @@ io.on('connection', function(socket) {
 
 		msg.socketId = socket.id;
 
-		sessions.push(new User().setUser(msg.uddi, msg.socketId, msg.user));
+		sessions.push(new User().setUser(msg.uddi, msg.socketId, pos.user));
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
 		io.emit('get_position', msg);
