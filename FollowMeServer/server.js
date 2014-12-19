@@ -27,7 +27,9 @@ io.on('connection', function(socket) {
 
 		msg.socketId = socket.id;
 
-		sessions.push(new User().setUser(msg.uddi, msg.socketId, pos.user));
+		var user = new User();
+		user.setUser(msg.uddi, msg.socketId, pos.user);
+		sessions[pos.user] = user;
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
 		io.emit('get_position', msg);
@@ -45,8 +47,9 @@ http.listen(port, function() {
 setInterval(function() {
 	console.log("***** timer *****");
 	for ( var user in sessions) {
+		console.log("TST:" + user.tst + " now:" + new Date().getTime());
 		if ((user.tst + 10 * 1000) < new Date().getTime()) {
-			console.log("Remove user..." + user.userName);
+			console.log("***Remove user..." + user.userName);
 			user = null;
 		}
 
@@ -65,6 +68,7 @@ function User() {
 		this.socketId = socketId;
 		this.userName = userName;
 		this.tst = new Date().getTime();
+
 		numOnlineUsers++;
 	};
 
