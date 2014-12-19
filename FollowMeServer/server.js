@@ -43,8 +43,9 @@ http.listen(port, function() {
 });
 
 setInterval(function() {
+	console.log("***** timer *****");
 	for ( var user in sessions) {
-		if (user.tst < new Date().getTime() - 10 * 1000) {
+		if ((user.tst + 10 * 1000) < new Date().getTime()) {
 			console.log("Remove user..." + user.userName);
 			user = null;
 		}
@@ -66,7 +67,5 @@ function User() {
 		this.tst = new Date().getTime();
 		numOnlineUsers++;
 	};
-
-	
 
 }
