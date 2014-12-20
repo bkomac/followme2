@@ -32,7 +32,7 @@ io.on('connection', function(socket) {
 		sessions[pos.user] = user;
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
-		io.broadcast.emit('get_position', msg);
+		socked.broadcast.emit('get_position', msg);
 	});
 });
 
