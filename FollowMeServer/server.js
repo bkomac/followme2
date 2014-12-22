@@ -25,14 +25,14 @@ io.on('connection', function(socket) {
 		// console.log(JSON.stringify(socket));
 		var pos = JSON.parse(msg);
 
-		msg.socketId = socket.id;
+		pos.socketId = socket.id;
 
 		var user = new User();
 		user.setUser(msg.uddi, msg.socketId, pos.user);
 		sessions[pos.user] = user;
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
-		socket.broadcast.emit('get_position', msg);
+		socket.broadcast.emit('get_position', pos);
 	});
 });
 
