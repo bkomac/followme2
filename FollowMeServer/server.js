@@ -35,7 +35,7 @@ io.on('connection', function(socket) {
 		socket.broadcast.emit('get_position', JSON.stringify(pos));
 	});
 
-	socket.on('logoff', function(msg) {
+	socket.on('logon', function(msg) {
 		console.log("Loging on user: " + msg.user);
 	});
 
