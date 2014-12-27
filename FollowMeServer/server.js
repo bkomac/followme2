@@ -31,8 +31,8 @@ io.on('connection', function(socket) {
 
 		pos.socketId = socket.id;
 
-//		var user = new User();
-//		user.setUser(msg.uddi, msg.socketId, pos.user);
+		var user = new User();
+		user.setUser(msg.uddi, msg.socketId, pos.user);
 //		sessions[pos.user] = user;
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
@@ -57,17 +57,17 @@ http.listen(port, function() {
 	console.log('listening on:' + port + ' ...');
 });
 
-setInterval(function() {
-	console.log("***** timer *****");
-	for ( var user in sessions) {
-		console.log("TST:" + user.tst + " now:" + new Date().getTime());
-		if ((user.tst + 10 * 1000) < new Date().getTime()) {
-			console.log("***Remove user..." + user.userName);
-			user = null;
-		}
-
-	}
-}, 10 * 1000);
+//setInterval(function() {
+//	console.log("***** timer *****");
+//	for ( var user in sessions) {
+//		console.log("TST:" + user.tst + " now:" + new Date().getTime());
+//		if ((user.tst + 10 * 1000) < new Date().getTime()) {
+//			console.log("***Remove user..." + user.userName);
+//			user = null;
+//		}
+//
+//	}
+//}, 10 * 1000);
 
 function User() {
 	this.id;
