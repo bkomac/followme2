@@ -18,8 +18,7 @@ console.log('Starting node on port ' + port + '...');
 //});
 
 
-
-app.use(express.static(__dirname + '/webUI'));
+app.use(app.static(__dirname + '/webUI'));
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
