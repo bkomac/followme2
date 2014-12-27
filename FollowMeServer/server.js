@@ -9,13 +9,17 @@ var numOnlineUsers;
 
 console.log('Starting node on port ' + port + '...');
 
-app.get('/', function(req, res) {
-	res.writeHead(200, {
-		'Content-Type' : 'text/plain'
+//app.get('/', function(req, res) {
+//	res.writeHead(200, {
+//		'Content-Type' : 'text/plain'
+//	});
+//	console.log("GET request...");
+//	res.end('This is socket.io endpoint on port ' + port + ' \n');
+//});
+
+app.get('/', function(req, res){
+	  res.sendfile(__dirname + '/webUI/index.html');
 	});
-	console.log("GET request...");
-	res.end('This is socket.io endpoint on port ' + port + ' \n');
-});
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
@@ -27,9 +31,9 @@ io.on('connection', function(socket) {
 
 		pos.socketId = socket.id;
 
-		var user = new User();
-		user.setUser(msg.uddi, msg.socketId, pos.user);
-		sessions[pos.user] = user;
+//		var user = new User();
+//		user.setUser(msg.uddi, msg.socketId, pos.user);
+//		sessions[pos.user] = user;
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
 		socket.broadcast.emit('get_position', JSON.stringify(pos));
