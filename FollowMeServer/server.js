@@ -17,9 +17,9 @@ console.log('Starting node on port ' + port + '...');
 //	res.end('This is socket.io endpoint on port ' + port + ' \n');
 //});
 
-app.get('/', function(req, res){
-	  res.sendfile(__dirname + '/webUI/index.html');
-	});
+
+
+app.use(express.static(__dirname + '/webUI'));
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
