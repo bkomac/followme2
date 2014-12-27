@@ -1,6 +1,7 @@
 var port = 4000;
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
@@ -18,7 +19,7 @@ console.log('Starting node on port ' + port + '...');
 //});
 
 
-app.use(app.static(__dirname + '/webUI'));
+app.use(express.static(__dirname + '/webUI'));
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
