@@ -34,11 +34,19 @@ io.on('connection', function(socket) {
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
 		socket.broadcast.emit('get_position', JSON.stringify(pos));
 	});
+
+	socket.on('logoff', function(msg) {
+		console.log("Loging on user: " + msg.user);
+	});
+
+	socket.on('logoff', function(msg) {
+		console.log("Loging off user: " + msg.user);
+	});
 });
 
 io.on('disconnect', function(socket) {
 	console.log('*** disconnected socket #' + socket.id);
-	//socket.disconnect();
+	// socket.disconnect();
 });
 
 http.listen(port, function() {
