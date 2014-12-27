@@ -1,0 +1,29 @@
+{
+  "name": "FollowMeServer",
+  "version": "0.1.0",
+  "homepage": "https://github.com/bkomac/followme2",
+  "authors": [
+    "bkomac <b@komac.si>"
+  ],
+  "description": "Follow Me serverside",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "follow",
+    "me"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}
