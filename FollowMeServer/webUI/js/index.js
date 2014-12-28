@@ -23,6 +23,15 @@ function init() {
 
 	socket.on("get_position", positionChange);
 
+	socket.on("logon", function(data) {
+		GUI.setStatus(data.user + " logged on...");
+		
+	});
+	
+	socket.on("logoff", function(data) {
+		GUI.setStatus(data.user + " logged off...");
+	});
+
 }
 
 function mapInit() {
@@ -46,7 +55,7 @@ function positionChange(data) {
 	panTo(data);
 
 	GUI.updateAddUser(data);
-	
+
 }
 
 // ////////////////////////////
@@ -261,7 +270,7 @@ var GUI = {
 	},
 
 	updateAddUser : function(data) {
-		var userConteinerUI = $('#user-' + data.socketId);
+		var userConteinerUI = $('#user-' + data.uuid);
 
 		if (userConteinerUI.length == 0) {
 			// DOM doesn't exsist
@@ -272,34 +281,25 @@ var GUI = {
 			userConteinerUI.replaceWith(this.__private.generateUserContainer(data));
 		}
 
-		if (userConteinerUI.length == 0)
-			trace("*** NO:" + 'user-' + data.socketId);
 	},
 
-	//private don't use outside!
+	// private don't use outside!
 	__private : {
 		generateUserContainer : function(data) {
-			var html = '<div id="user-'+data.socketId+'" class="col-xs-6 col-md-3">'
-						+'<div class="panel panel-default">'
-							+'<div class="panel-heading">'
-								+'<h3 class="panel-title">'
-								+'<img src="'+Utils.getIcon(data.user, 1)+'" /><b> '+data.user
-								+'</b></h3>'
-							+'</div>'
+			var html = '<div id="user-' + data.uuid + '" class="col-md-4">' + '<div class="panel panel-default">'
+					+ '<div class="panel-heading">' + '<h3 class="panel-title">' + '<img src="' + Utils.getIcon(data.user, 1) + '" /><b> '
+					+ data.user + '</b></h3>' + '</div>'
 
-							+'<div class="panel-body">'
-								+'<table class="table table-striped">'
-								+'<tr><th>ID:</td><td>'+data.socketId+'</td></tr>'
-								+'<tr><th>Lat:</td><td>'+data.lat+' °</td></tr>'
-								+'<tr><th>Lng:</td><td>'+data.lng+' °</td></tr>'
-								+'<tr><th>Alt:</td><td>'+data.alt+' m</td></tr>'
-								+'<tr><th>Accrur.:</td><td>'+data.accur+' m</td></tr>'
-								+'<tr><th>Speed:</td><td>'+data.speed+' km/h</td></tr>'
-								+'</table>'
-							+'</div>'
-						+'</div>'
-					+'</div>';
-			
+					+ '<div class="panel-body">' + '<table class="table table-striped">' + '<tr><th>ID:</td><td>' + data.uuid
+					+ '</td></tr>' + '<tr><th>Lat:</td><td>' + data.lat + ' °</td></tr>' + '<tr><th>Lng:</td><td>' + data.lng
+					+ ' °</td></tr>' + '<tr><th>Alt:</td><td>' + data.alt + ' m</td></tr>' + '<tr><th>Accrur.:</td><td>' + data.accur
+					+ ' m</td></tr>' + '<tr><th>Speed:</td><td>' + data.speed + ' km/h</td></tr>' + '<tr><th>Battery:</td><td>'
+
+					+ '<div class="progress">' + '<div class="progress-bar" role="progressbar" aria-valuenow="' + data.battery.level
+					+ '" aria-valuemin="0" aria-valuemax="100" style="width: ' + data.battery.level + '%;">' + data.battery.level
+					+ '%</div></div>' + '</td></tr>';
+			+'</table>' + '</div>' + '</div>' + '</div>';
+
 			return html;
 		}
 	}

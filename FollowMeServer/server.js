@@ -41,10 +41,14 @@ io.on('connection', function(socket) {
 
 	socket.on('logon', function(msg) {
 		console.log("Loging on user: " + msg.user);
+		msg.socketId = socket.id;
+		socket.broadcast.emit('logon', JSON.stringify(msg));
 	});
 
 	socket.on('logoff', function(msg) {
 		console.log("Loging off user: " + msg.user);
+		msg.socketId = socket.id;
+		socket.broadcast.emit('logoff', JSON.stringify(msg));
 	});
 });
 
