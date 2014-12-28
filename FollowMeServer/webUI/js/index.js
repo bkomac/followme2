@@ -283,7 +283,7 @@ var GUI = {
 						+'<div class="panel panel-default">'
 							+'<div class="panel-heading">'
 								+'<h3 class="panel-title">'
-								+'<img src="img/icon/letters_1/letter_a.png" /><b> '+data.user
+								+'<img src="'+Utils.getIcon(data.user, 1)+'" /><b> '+data.user
 								+'</b></h3>'
 							+'</div>'
 
