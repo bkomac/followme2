@@ -42,7 +42,11 @@ function positionChange(data) {
 	trace("getting position:" + data);
 	data = JSON.parse(data);
 	app.addUser(data);
+	GUI.setStatus("User " + data.user + " is emitting...");
 	panTo(data);
+
+	GUI.updateAddUser(data);
+	
 }
 
 // ////////////////////////////
@@ -87,24 +91,21 @@ function panTo(data) {
 	var path = app.getPoly(data.uuid).getPath();
 	path.push(point);
 
-	google.maps.event
-			.addListener(app.getMarker(data.uuid), 'click',
-					function() {
+	google.maps.event.addListener(app.getMarker(data.uuid), 'click', function() {
 
-						var info = ('<h3>User: ' + data.user + '</h3><br>Latitude: ' + data.lat + '<br>' + 'Longitude: ' + data.lng + '<br>'
-								+ 'Altitude: ' + data.alt + ' m<br>' + 'Accuracy: ' + data.accur + ' m<br>' + '<br>' + 'Speed: ' + data.speed
-								+ 'km/h<br>'); // + 'Timestamp: ' + new Date(data.tst));
+		var info = ('<h3>User: ' + data.user + '</h3><br>Latitude: ' + data.lat + '<br>' + 'Longitude: ' + data.lng + '<br>' + 'Altitude: '
+				+ data.alt + ' m<br>' + 'Accuracy: ' + data.accur + ' m<br>' + '<br>' + 'Speed: ' + data.speed + 'km/h<br>'); // +
+		// 'Timestamp:
+		if (!infowindow) {
+			infowindow = new google.maps.InfoWindow({
+				content : info
+			});
+		} else {
+			infowindow.setContent(info);
+		}
 
-						if (!infowindow) {
-							infowindow = new google.maps.InfoWindow({
-								content : info
-							});
-						} else {
-							infowindow.setContent(info);
-						}
-
-						infowindow.open(map, app.getMarker(data.uuid));
-					});
+		infowindow.open(map, app.getMarker(data.uuid));
+	});
 
 }
 
@@ -248,7 +249,61 @@ var Utils = {
 		}
 
 		return "img/icon/letters_1/letter_x.png";
+	},
+
+};
+
+var GUI = {
+
+	setStatus : function(msg) {
+		var statusUI = $("#status");
+		statusUI.html(msg);
+	},
+
+	updateAddUser : function(data) {
+		var userConteinerUI = $('#user-' + data.socketId);
+
+		if (userConteinerUI.length == 0) {
+			// DOM doesn't exsist
+			$('#userRow').append(this.__private.generateUserContainer(data));
+
+		} else {
+			// DOM exists
+			userConteinerUI.replaceWith(this.__private.generateUserContainer(data));
+		}
+
+		if (userConteinerUI.length == 0)
+			trace("*** NO:" + 'user-' + data.socketId);
+	},
+
+	//private don't use outside!
+	__private : {
+		generateUserContainer : function(data) {
+			var html = '<div id="user-'+data.socketId+'" class="col-xs-6 col-md-3">'
+						+'<div class="panel panel-default">'
+							+'<div class="panel-heading">'
+								+'<h3 class="panel-title">'
+								+'<img src="img/icon/letters_1/letter_a.png" /><b> '+data.user
+								+'</b></h3>'
+							+'</div>'
+
+							+'<div class="panel-body">'
+								+'<table class="table table-striped">'
+								+'<tr><th>ID:</td><td>'+data.socketId+'</td></tr>'
+								+'<tr><th>Lat:</td><td>'+data.lat+' °</td></tr>'
+								+'<tr><th>Lng:</td><td>'+data.lng+' °</td></tr>'
+								+'<tr><th>Alt:</td><td>'+data.alt+' m</td></tr>'
+								+'<tr><th>Accrur.:</td><td>'+data.accur+' m</td></tr>'
+								+'<tr><th>Speed:</td><td>'+data.speed+' km/h</td></tr>'
+								+'</table>'
+							+'</div>'
+						+'</div>'
+					+'</div>';
+			
+			return html;
+		}
 	}
+
 };
 
 // ///////////////
