@@ -96,7 +96,7 @@ function User() {
 	this.tst;
 
 	this.setUser = function(id, socketId, userName) {
-		console.log("Adding user... " + userName);
+		console.log("getting possition from... " + userName);
 		this.id = id;
 		this.socketId = socketId;
 		this.userName = userName;
