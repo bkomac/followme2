@@ -31,16 +31,16 @@ function init() {
 			GUI.setStatus(data.user + " logged off...");
 			GUI.removeUser(data);
 		});
-		socket.on("connect", function(data) {
+//		socket.on("connect", function(data) {
 //			data = JSON.parse(data);
-			GUI.setStatus(data.user + " connected...");
-
-		});
-		socket.on("disconnect", function(data) {
-//			data = JSON.parse(data);
-			GUI.setStatus(data.user + " disconnected...");
-			GUI.removeUser(data);
-		});
+//			GUI.setStatus(data.user + " connected...");
+//
+//		});
+//		socket.on("disconnect", function(data) {
+////			data = JSON.parse(data);
+//			GUI.setStatus(data.user + " disconnected...");
+//			GUI.removeUser(data);
+//		});
 	} catch (e) {
 		error(e.message);
 	}

@@ -54,10 +54,10 @@ io.on('connection', function(socket) {
 //	});
 
 	socket.on('logon', function(msg) {
-		msg = JSON.parse(msg);
+		//msg = JSON.parse(msg);
 		console.log("Loging on user: " + msg.user);
 		msg.socketId = socket.id;
-		socket.broadcast.emit('logon', JSON.stringify(msg));
+		socket.broadcast.emit('logon', msg);
 	});
 
 	socket.on('logoff', function(msg) {
