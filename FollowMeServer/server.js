@@ -60,7 +60,7 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('logoff', function(msg) {
-		console.log("Loging off user: " + JSON.strongify(msg));
+		console.log("Loging off user: " + JSON.stringify(msg));
 		msg.socketId = socket.id;
 		socket.broadcast.emit('logoff', msg);
 	});
