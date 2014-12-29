@@ -25,11 +25,12 @@ function init() {
 
 	socket.on("logon", function(data) {
 		GUI.setStatus(data.user + " logged on...");
-		
+		GUI.updateAddUser(data);
 	});
 	
 	socket.on("logoff", function(data) {
 		GUI.setStatus(data.user + " logged off...");
+		GUI.removeUser(data);
 	});
 
 }
@@ -281,6 +282,11 @@ var GUI = {
 			userConteinerUI.replaceWith(this.__private.generateUserContainer(data));
 		}
 
+	},
+	
+	removeUser : function(data) {
+		var userConteinerUI = $('#user-' + data.uuid);
+		userConteinerUI.remove();
 	},
 
 	// private don't use outside!
