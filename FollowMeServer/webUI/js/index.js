@@ -22,25 +22,26 @@ function init() {
 
 	try {
 		socket.on("logon", function(data) {
-//			data = JSON.parse(data);
+			// data = JSON.parse(data);
 			GUI.setStatus(data.user + " logged on...");
 			GUI.updateAddUser(data);
 		});
 		socket.on("logoff", function(data) {
-//			data = JSON.parse(data);
+			// data = JSON.parse(data);
 			GUI.setStatus(data.user + " logged off...");
+			
+		});
+		// socket.on("connect", function(data) {
+		// data = JSON.parse(data);
+		// GUI.setStatus(data.user + " connected...");
+		//
+		// });
+		
+		 socket.on("disconnect", function(data) {
+			// data = JSON.parse(data);
+			GUI.setStatus(data.user + " disconnected...");
 			GUI.removeUser(data);
 		});
-//		socket.on("connect", function(data) {
-//			data = JSON.parse(data);
-//			GUI.setStatus(data.user + " connected...");
-//
-//		});
-//		socket.on("disconnect", function(data) {
-////			data = JSON.parse(data);
-//			GUI.setStatus(data.user + " disconnected...");
-//			GUI.removeUser(data);
-//		});
 	} catch (e) {
 		error(e.message);
 	}
@@ -295,10 +296,14 @@ var GUI = {
 		}
 
 	},
-	
+
 	removeUser : function(data) {
 		var userConteinerUI = $('#user-' + data.uuid);
+		trace("Removing user from GUI: " + data.user+" "+'#user-' + data.uuid);
 		userConteinerUI.remove();
+		
+		app.getUser(data.uuid).marker.setMap(null);
+		app.getUser(data.uuid).poly.setMap(null);
 	},
 
 	// private don't use outside!
