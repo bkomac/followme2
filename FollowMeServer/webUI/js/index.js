@@ -15,37 +15,35 @@ function init() {
 	mapInit();
 
 	socket = io(remoteAddress);
-	socket.emit("logon", {
-		"user" : "bobo"
-	});
 
 	app = new OnlineUsers();
 
 	socket.on("get_position", positionChange);
 
-	socket.on("logon", function(data) {
-		data = JSON.parse(data);
-		GUI.setStatus(data.user + " logged on...");
-		GUI.updateAddUser(data);
-	});
-	
-	socket.on("logoff", function(data) {
-		data = JSON.parse(data);
-		GUI.setStatus(data.user + " logged off...");
-		GUI.removeUser(data);
-	});
-	
-	socket.on("connect", function(data) {
-		data = JSON.parse(data);
-		GUI.setStatus(data.user + " connected...");
-		
-	});
-	
-	socket.on("disconnect", function(data) {
-		data = JSON.parse(data);
-		GUI.setStatus(data.user + " disconnected...");
-		GUI.removeUser(data);
-	});
+	try {
+		socket.on("logon", function(data) {
+//			data = JSON.parse(data);
+			GUI.setStatus(data.user + " logged on...");
+			GUI.updateAddUser(data);
+		});
+		socket.on("logoff", function(data) {
+//			data = JSON.parse(data);
+			GUI.setStatus(data.user + " logged off...");
+			GUI.removeUser(data);
+		});
+		socket.on("connect", function(data) {
+//			data = JSON.parse(data);
+			GUI.setStatus(data.user + " connected...");
+
+		});
+		socket.on("disconnect", function(data) {
+//			data = JSON.parse(data);
+			GUI.setStatus(data.user + " disconnected...");
+			GUI.removeUser(data);
+		});
+	} catch (e) {
+		error(e.message);
+	}
 
 }
 
