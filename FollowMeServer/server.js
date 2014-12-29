@@ -46,12 +46,12 @@ io.on('connection', function(socket) {
 		socket.broadcast.emit('connect', JSON.stringify(msg));
 	});
 	
-	socket.on('disconnect', function(msg) {
-		msg = JSON.parse(msg);
-		console.log("Disconnecting user: " + msg.user);
-		msg.socketId = socket.id;
-		socket.broadcast.emit('disconnect', JSON.stringify(msg));
-	});
+//	socket.on('disconnect', function(msg) {
+//		msg = JSON.parse(msg);
+//		console.log("Disconnecting user: " + msg.user);
+//		msg.socketId = socket.id;
+//		socket.broadcast.emit('disconnect', JSON.stringify(msg));
+//	});
 
 	socket.on('logon', function(msg) {
 		msg = JSON.parse(msg);
