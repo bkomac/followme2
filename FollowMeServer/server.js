@@ -45,11 +45,11 @@ io.on('connection', function(socket) {
 		socket.broadcast.emit('connect', msg);
 	});
 	
-	socket.on('disconnect', function(msg) {
-		console.log("Disconnecting user: " + msg.user);
-		msg.socketId = socket.id;
-		socket.broadcast.emit('disconnect', msg);
-	});
+//	socket.on('disconnect', function(msg) {
+//		console.log("Disconnecting user: " + msg.user);
+//		msg.socketId = socket.id;
+//		socket.broadcast.emit('disconnect', msg);
+//	});
 
 	socket.on('logon', function(msg) {
 		console.log("Loging on user: " + msg.user);

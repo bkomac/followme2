@@ -37,11 +37,11 @@ function init() {
 		//
 		// });
 		
-		 socket.on("disconnect", function(data) {
-			// data = JSON.parse(data);
-			GUI.setStatus(data.user + " disconnected...");
-			GUI.removeUser(data);
-		});
+//		 socket.on("disconnect", function(data) {
+//			// data = JSON.parse(data);
+//			GUI.setStatus(data.user + " disconnected...");
+//			GUI.removeUser(data);
+//		});
 	} catch (e) {
 		error(e.message);
 	}
