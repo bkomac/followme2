@@ -29,19 +29,19 @@ function init() {
 		socket.on("logoff", function(data) {
 			// data = JSON.parse(data);
 			GUI.setStatus(data.user + " logged off...");
-			
+
 		});
 		// socket.on("connect", function(data) {
 		// data = JSON.parse(data);
 		// GUI.setStatus(data.user + " connected...");
 		//
 		// });
-		
-//		 socket.on("disconnect", function(data) {
-//			// data = JSON.parse(data);
-//			GUI.setStatus(data.user + " disconnected...");
-//			GUI.removeUser(data);
-//		});
+
+		// socket.on("disconnect", function(data) {
+		// // data = JSON.parse(data);
+		// GUI.setStatus(data.user + " disconnected...");
+		// GUI.removeUser(data);
+		// });
 	} catch (e) {
 		error(e.message);
 	}
@@ -299,9 +299,9 @@ var GUI = {
 
 	removeUser : function(data) {
 		var userConteinerUI = $('#user-' + data.uuid);
-		trace("Removing user from GUI: " + data.user+" "+'#user-' + data.uuid);
+		trace("Removing user from GUI: " + data.user + " " + '#user-' + data.uuid);
 		userConteinerUI.remove();
-		
+
 		app.getUser(data.uuid).marker.setMap(null);
 		app.getUser(data.uuid).poly.setMap(null);
 	},
@@ -309,19 +309,44 @@ var GUI = {
 	// private don't use outside!
 	__private : {
 		generateUserContainer : function(data) {
+			var batt = data.battery;
+			if (batt == undefined)
+				batt = {
+					"level" : 100
+				};
+
+var info = '<br><table class="table table-striped">' + '<tr><th>ID:</td><td>' + data.uuid
++ '</td></tr>' + '<tr><th>Lat:</td><td>' + data.lat + ' °</td></tr>' + '<tr><th>Lng:</td><td>' + data.lng
++ ' °</td></tr>' + '<tr><th>Alt:</td><td>' + data.alt + ' m</td></tr>' + '<tr><th>Accrur.:</td><td>' + data.accur
++ ' m</td></tr>' + '<tr><th>Speed:</td><td>' + data.speed + ' km/h</td></tr>' + '<tr><th>Battery:</td><td>'
+
++ '<div class="progress">' + '<div class="progress-bar" role="progressbar" aria-valuenow="' + batt.level
++ '" aria-valuemin="0" aria-valuemax="100" style="width: ' + batt.level + '%;">' + batt.level + '%</div></div>'
++ '</td></tr>'
++'</table>';			
+			
+var tab = '<div role="tabpanel">'
+    +'<ul class="nav nav-tabs" role="tablist">'
+    +'<li role="presentation" class="active"><a id="info" href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>'
+    +'<li role="presentation"><a id="alt" href="#alt" aria-controls="alt" role="tab" data-toggle="tab">Altitude</a></li>'
+    +'<li role="presentation"><a id="batt" href="#batt" aria-controls="batt" role="tab" data-toggle="tab">Battery</a></li>'
+  +'</ul>'
+
+  +'<div class="tab-content">'
+    +'<div role="tabpanel" aria-labelledby="info" class="tab-pane active" id="info-cont">'+info+'</div>'
+    +'<div role="tabpanel" aria-labelledby="alt" class="tab-pane" id="alt-cont">...</div>'
+    +'<div role="tabpanel" aria-labelledby="batt" class="tab-pane" id="batt-cont">...</div>'
+  +'</div>'
++'</div>';
+			
+			
 			var html = '<div id="user-' + data.uuid + '" class="col-md-4">' + '<div class="panel panel-default">'
 					+ '<div class="panel-heading">' + '<h3 class="panel-title">' + '<img src="' + Utils.getIcon(data.user, 1) + '" /><b> '
 					+ data.user + '</b></h3>' + '</div>'
 
-					+ '<div class="panel-body">' + '<table class="table table-striped">' + '<tr><th>ID:</td><td>' + data.uuid
-					+ '</td></tr>' + '<tr><th>Lat:</td><td>' + data.lat + ' °</td></tr>' + '<tr><th>Lng:</td><td>' + data.lng
-					+ ' °</td></tr>' + '<tr><th>Alt:</td><td>' + data.alt + ' m</td></tr>' + '<tr><th>Accrur.:</td><td>' + data.accur
-					+ ' m</td></tr>' + '<tr><th>Speed:</td><td>' + data.speed + ' km/h</td></tr>' + '<tr><th>Battery:</td><td>'
-
-					+ '<div class="progress">' + '<div class="progress-bar" role="progressbar" aria-valuenow="' + data.battery.level
-					+ '" aria-valuemin="0" aria-valuemax="100" style="width: ' + data.battery.level + '%;">' + data.battery.level
-					+ '%</div></div>' + '</td></tr>';
-			+'</table>' + '</div>' + '</div>' + '</div>';
+					+ '<div class="panel-body">' 
+					+ tab 
+			+ '</div>' + '</div>' + '</div>';
 
 			return html;
 		}
