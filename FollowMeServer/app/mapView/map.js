@@ -9,7 +9,7 @@ angular.module('FollowMe.map', [ 'ngRoute' ])
 	});
 } ])
 
-.controller('MapCtrl', ['SocketService', function(SocketService) {
+.controller('MapCtrl', [ 'SocketService', function(SocketService) {
 
 	var myOptions = {
 		zoom : 13,
@@ -17,9 +17,18 @@ angular.module('FollowMe.map', [ 'ngRoute' ])
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	};
 	var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+	var socket =  SocketService.init("http://ws.komac.si:4000", map);
+	socket.onMessage(function(data) {
+		console.log("***Call back....");
+		console.log("position:" + data);
+		
+		
+	});
 	
-	SocketService.init("http://ws.komac.si:4000").onMessage(function() {
-		console.log("***Calll back....");
-	})
+	
+	
+	
+	
 
 } ]);
