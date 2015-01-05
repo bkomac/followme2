@@ -92,7 +92,7 @@ angular.module('FollowMe').service(
 					};
 
 					this.getOnlineUsers = function() {
-						return users;
+						return users.users;
 					};
 
 				} ]);
@@ -104,11 +104,18 @@ function OnlineUsers() {
 
 	this.addUser = function(data) {
 		trace("Adding user..." + data.user + " socketId:" + data.socketId);
+		echo(data);
 		var usr = new User();
 		usr.userName = data.user;
 		usr.socketId = data.socketId;
 		usr.tst = new Date().getTime();
 		usr.uuid = data.uuid;
+		
+		usr.lat = data.lat;
+		usr.lng = data.lng;
+		usr.alt = data.alt;
+		usr.battery = data.battery;
+		usr.speed = data.speed;
 
 		if (this.getUser(data.uuid) == null) {
 			trace("Adding user..." + data.user + " socketId:" + data.socketId);

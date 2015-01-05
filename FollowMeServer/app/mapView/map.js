@@ -9,7 +9,7 @@ angular.module('FollowMe.map', [ 'ngRoute' ])
 	});
 } ])
 
-.controller('MapCtrl', [ 'SocketService', function(SocketService) {
+.controller('MapCtrl', [ 'SocketService', '$scope', function(SocketService, $scope) {
 
 	var myOptions = {
 		zoom : 13,
@@ -23,12 +23,15 @@ angular.module('FollowMe.map', [ 'ngRoute' ])
 		console.log("***Call back....");
 		console.log("position:" + data);
 		
+		$scope.users = socket.getOnlineUsers();
+		$scope.status = data.user + " emits ...";
 		
+		$scope.$apply();
 	});
 	
-	
-	
-	
-	
+	$scope.getIcon = function(user) {
+		return Utils.getIcon(user);
+	}
+	 
 
 } ]);

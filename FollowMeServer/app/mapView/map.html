@@ -5,7 +5,7 @@
 		<div id="map"></div>
 	</div>
 	<div class="panel-footer">
-		<span id="status">&nbsp;</span>
+		<span id="status">&nbsp;{{status}}</span>
 	</div>
 </div>
 
@@ -16,6 +16,89 @@
 
 	<div class="panel-body">
 
-		<div class="row" id="userRow"></div>
+		<div class="row" id="userRow">
+
+			<div ng-repeat="user in users" id="user-{{user.uuid}}" class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<img src="{{getIcon(user.userName)}}" /><b> {{user.userName}}</b>
+						</h3>
+					</div>
+
+
+
+
+
+					<div class="panel-body">
+						<div>
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#info-cont{{user.uuid}}" data-toggle="tab">Info</a></li>
+								<li><a data-toggle="tab" href="#alt-cont{{user.uuid}}">Altitude</a></li>
+								<li><a href="#batt-cont{{user.uuid}}" data-toggle="tab">Battery</a></li>
+							</ul>
+
+							<div id="tabContent{{user.uuid}}" class="tab-content">
+
+								<div class="tab-pane active" id="info-cont{{user.uuid}}">
+									<br>
+									<table class="table table-striped">
+										<tr>
+											<th>ID:
+											</td>
+											<td>{{user.uuid}}</td>
+										</tr>
+										<tr>
+											<th>Lat:
+											</td>
+											<td>{{user.lat}}</td>
+										</tr>
+										<tr>
+											<th>Lng:
+											</td>
+											<td>{{user.lng}}</td>
+										</tr>
+										<tr>
+											<th>Alt:
+											</td>
+											<td>{{user.alt}} m</td>
+										</tr>
+										<tr>
+											<th>Accrur.:
+											</td>
+											<td>{{user.accur}} m</td>
+										</tr>
+										<tr>
+											<th>Speed:
+											</td>
+											<td>{{user.speed}} km/h</td>
+										</tr>
+										<tr>
+											<th>Battery:
+											</td>
+											<td>
+
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" aria-valuenow="{{user.battery.level}}" aria-valuemin="0" aria-valuemax="100"
+														style="width: {{user.battery.level}}%">{{user.battery.level}} %</div>
+												</div>
+											</td>
+										</tr>
+									</table>
+
+								</div>
+								<div class="tab-pane" id="alt-cont{{user.uuid}}">hjjhkhkhkj</div>
+								<div class="tab-pane" id="batt-cont{{user.uuid}}">kljlkhkhkjh</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+		</div>
 	</div>
 </div>
