@@ -101,7 +101,6 @@ function User() {
 function exitHandler(options, err) {
 	if (options.cleanup) {
 		console.log('** FollowMe server closing down ...');
-		
 	}
 	if (err)
 		console.log(err.stack);
