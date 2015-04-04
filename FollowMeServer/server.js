@@ -8,7 +8,7 @@ var io = require('socket.io')(http);
 var sessions = [];
 var numOnlineUsers;
 
-console.log('Starting node on port ' + port + '...');
+console.log('Starting FollowMe server on port ' + port + '...');
 
 //app.get('/', function(req, res) {
 //	res.writeHead(200, {
@@ -97,3 +97,29 @@ function User() {
 	};
 
 }
+
+function exitHandler(options, err) {
+	if (options.cleanup) {
+		console.log('** FollowMe server closing down ...');
+		
+	}
+	if (err)
+		console.log(err.stack);
+	if (options.exit)
+		process.exit();
+}
+
+// do something when app is closing
+process.on('exit', exitHandler.bind(null, {
+	cleanup : true
+}));
+
+// catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {
+	exit : true
+}));
+
+// catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {
+	exit : true
+}));
