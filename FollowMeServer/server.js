@@ -35,7 +35,7 @@ io.on('connection', function(socket) {
 //		user.setUser(msg.uddi, msg.socketId, pos.user);
 		// sessions[pos.user] = user;
 
-		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
+		console.log("**user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
 		socket.broadcast.emit('get_position', JSON.stringify(pos));
 	});
 
