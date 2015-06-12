@@ -31,8 +31,8 @@ io.on('connection', function(socket) {
 		pos.socketId = socket.id;
 		pos.follows = numOnlineUsers;
 
-		var user = new User();
-		user.setUser(msg.uddi, msg.socketId, pos.user);
+//		var user = new User();
+//		user.setUser(msg.uddi, msg.socketId, pos.user);
 		// sessions[pos.user] = user;
 
 		console.log("user: " + pos.user + ":. #" + socket.id + "  " + pos.lat + " " + pos.lng);
