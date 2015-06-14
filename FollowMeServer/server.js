@@ -31,7 +31,7 @@ io.on('connection', function(socket) {
 		var pos = JSON.parse(msg);
 
 		pos.socketId = socket.id;
-		//pos.follows = numOnlineUsers;
+		pos.follows = numOnlineUsers;
 
 //		var user = new User();
 //		user.setUser(msg.uddi, msg.socketId, pos.user);
